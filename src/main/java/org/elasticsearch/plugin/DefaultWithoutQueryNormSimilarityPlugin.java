@@ -15,21 +15,21 @@
 package org.elasticsearch.plugin;
 
 import org.elasticsearch.index.similarity.SimilarityModule;
-import org.elasticsearch.index.similarity.PositionSimilarityProvider;
+import org.elasticsearch.index.similarity.DefaultWithoutQueryNormSimilarityProvider;
 import org.elasticsearch.plugins.Plugin;
 
-public class PositionSimilarityPlugin extends Plugin {
+public class DefaultWithoutQueryNormSimilarityPlugin extends Plugin {
     @Override
     public String name() {
-        return "position-similarity";
+        return "default-without-query-norm-similarity";
     }
 
     @Override
     public String description() {
-        return "position-similarity plugin";
+        return "default-without-query-norm-similarity plugin";
     }
 
     public void onModule(SimilarityModule module) {
-        module.addSimilarity("position-similarity", PositionSimilarityProvider.class);
+        module.addSimilarity("default-without-query-norm-similarity", DefaultWithoutQueryNormSimilarityProvider.class);
     }
 }

@@ -18,16 +18,16 @@ import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
 import org.elasticsearch.common.settings.Settings;
 
-public class PositionSimilarityProvider extends AbstractSimilarityProvider {
-    private final PositionSimilarity similarity;
+public class DefaultWithoutQueryNormSimilarityProvider extends AbstractSimilarityProvider {
+    private final DefaultWithoutQueryNormSimilarity similarity;
 
     @Inject
-    public PositionSimilarityProvider(@Assisted String name, @Assisted Settings settings) {
+    public DefaultWithoutQueryNormSimilarityProvider(@Assisted String name, @Assisted Settings settings) {
         super(name);
-        this.similarity = new PositionSimilarity(settings);
+        this.similarity = new DefaultWithoutQueryNormSimilarity(settings);
     }
 
-    public PositionSimilarity get() {
+    public DefaultWithoutQueryNormSimilarity get() {
         return similarity;
     }
 }
