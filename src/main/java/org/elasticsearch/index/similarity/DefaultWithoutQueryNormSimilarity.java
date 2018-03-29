@@ -110,7 +110,7 @@ public class DefaultWithoutQueryNormSimilarity extends TFIDFWithoutQueryNormSimi
      *  FieldInvertState#getLength()} - {@link
      *  FieldInvertState#getNumOverlap()}.
      *
-     *  @lucene.experimental */
+     */
     @Override
     public float lengthNorm(FieldInvertState state) {
         final int numTerms;
@@ -156,7 +156,7 @@ public class DefaultWithoutQueryNormSimilarity extends TFIDFWithoutQueryNormSimi
      *  norm.  By default this is true, meaning overlap
      *  tokens do not count when computing norms.
      *
-     *  @lucene.experimental
+     *
      *
      *  @see #computeNorm
      */
