@@ -52,7 +52,23 @@ curl -s -XPOST "http://localhost:9200/test_index/_refresh"
 
 echo
 echo
-echo 'expecting to match all with integer scores'
+echo 'Default: expecting to match all with integer scores'
+
+curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
+{
+  "explain": false,
+  "query": {
+    "match": {
+      "field1": "customer service representative",
+      "operator": "or"
+    }
+  }
+}
+'
+
+echo
+echo
+echo 'Custom: expecting to match all with integer scores'
 
 curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 {
@@ -68,7 +84,7 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 
 echo
 echo
-echo 'explain highest score'
+echo 'Custom: explain highest score'
 
 curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 {
