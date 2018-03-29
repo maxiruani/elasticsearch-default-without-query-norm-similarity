@@ -10,9 +10,9 @@
         <version>2.4.1</version>
     </parent>
 
-    <name>elasticsearch-position-similarity</name>
-    <artifactId>elasticsearch-position-similarity</artifactId>
-    <description>Provides scoring based on matching a term or a phrase relative to a position of the term in a searched field.</description>
+    <name>elasticsearch-default-without-query-norm-similarity</name>
+    <artifactId>elasticsearch-default-without-query-norm-similarity</artifactId>
+    <description>Provides default scoring without query normalization.</description>
     
     <licenses>
         <license>
@@ -24,7 +24,7 @@
     
     <properties>
         <!-- define class name for the descriptor file -->
-        <elasticsearch.plugin.classname>org.elasticsearch.plugin.PositionSimilarityPlugin</elasticsearch.plugin.classname>
+        <elasticsearch.plugin.classname>org.elasticsearch.plugin.DefaultWithoutQueryNormSimilarityPlugin</elasticsearch.plugin.classname>
     </properties>
 
     <!-- needed for the snapshots of elasticsearch -->
