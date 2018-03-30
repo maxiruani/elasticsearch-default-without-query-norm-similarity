@@ -2,7 +2,7 @@
 
 curl -s -XDELETE "http://localhost:9200/test_index"
 
-curl -s -XPUT "http://localhost:9200/test_index" -d '
+curl -s -XPOST "http://localhost:9200/test_index" -d '
 {
   "settings": {
     "index": {
@@ -59,8 +59,10 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
   "explain": false,
   "query": {
     "match": {
-      "field1": "customer service representative",
-      "operator": "or"
+      "field1": {
+        "query: customer service representative",
+        "operator": "or"
+      }
     }
   }
 }
@@ -75,8 +77,10 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
   "explain": false,
   "query": {
     "match": {
-      "field2": "customer service representative",
-      "operator": "or"
+      "field2": {
+        "query: customer service representative",
+        "operator": "or"
+      }
     }
   }
 }
@@ -93,8 +97,10 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
   "size": 1,
   "query": {
     "match": {
-      "field2": "customer service representative",
-      "operator": "or"
+      "field2": {
+        "query: customer service representative",
+        "operator": "or"
+      }
     }
   }
 }
