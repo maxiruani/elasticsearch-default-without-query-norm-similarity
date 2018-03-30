@@ -24,12 +24,18 @@ curl -XPUT 'localhost:9200/test_index/test_type/_mapping' -d '
     "properties": {
       "field1": {
         "type": "string",
-        "analyzer": "standard"
+        "analyzer": "standard",
+        "norms": {
+          "enabled": false
+        }
       },
       "field2": {
         "type": "string",
         "analyzer": "standard",
-        "similarity": "defaultWithoutQueryNormSimilarity"
+        "similarity": "defaultWithoutQueryNormSimilarity",
+        "norms": {
+          "enabled": false
+        }
       }
     }
   }
@@ -60,7 +66,7 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
   "query": {
     "match": {
       "field1": {
-        "query: customer service representative",
+        "query": "customer service representative",
         "operator": "or"
       }
     }
@@ -78,7 +84,7 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
   "query": {
     "match": {
       "field2": {
-        "query: customer service representative",
+        "query": "customer service representative",
         "operator": "or"
       }
     }
@@ -98,7 +104,7 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
   "query": {
     "match": {
       "field2": {
-        "query: customer service representative",
+        "query": "customer service representative",
         "operator": "or"
       }
     }
