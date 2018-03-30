@@ -58,11 +58,11 @@ curl -s -XPOST "http://localhost:9200/test_index/_refresh"
 
 echo
 echo
-echo 'Default: expecting to match all with integer scores'
+echo 'Default: Expect all with Query Norm'
 
 curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 {
-  "explain": false,
+  "explain": true,
   "query": {
     "match": {
       "field1": {
@@ -76,11 +76,12 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 
 echo
 echo
-echo 'Custom: expecting to match all with integer scores'
+echo 'Custom: Expect all without Query Norm'
 
 curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 {
-  "explain": false,
+  "explain": true,
+  "from": 0,
   "query": {
     "match": {
       "field2": {
@@ -92,22 +93,27 @@ curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 }
 '
 
+
 echo
 echo
-echo 'Custom: explain highest score'
+echo 'Custom: Constant score - Expect all without Query Norm'
 
 curl -s "localhost:9200/test_index/test_type/_search?pretty=true" -d '
 {
   "explain": true,
   "from": 0,
-  "size": 1,
   "query": {
-    "match": {
-      "field2": {
-        "query": "customer service representative",
-        "operator": "or"
+    "constant_score": {
+      "query": {
+        "match": {
+          "field2": {
+            "query": "customer service representative",
+            "operator": "or"
+          }
+        }
       }
     }
   }
+
 }
 '

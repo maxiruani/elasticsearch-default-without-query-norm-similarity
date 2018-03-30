@@ -68,12 +68,6 @@ public class DefaultWithoutQueryNormSimilarity extends TFIDFWithoutQueryNormSimi
         return overlap / (float)maxOverlap;
     }
 
-    /** Implemented as <code>1/sqrt(sumOfSquaredWeights)</code>. */
-    @Override
-    public float queryNorm(float sumOfSquaredWeights) {
-        return (float)(1.0);
-    }
-
     /**
      * Encodes a normalization factor for storage in an index.
      * <p>

@@ -528,22 +528,6 @@ public abstract class TFIDFWithoutQueryNormSimilarity extends Similarity {
     @Override
     public abstract float coord(int overlap, int maxOverlap);
 
-    /** Computes the normalization value for a query given the sum of the squared
-     * weights of each of the query terms.  This value is multiplied into the
-     * weight of each query term. While the classic query normalization factor is
-     * computed as 1/sqrt(sumOfSquaredWeights), other implementations might
-     * completely ignore sumOfSquaredWeights (ie return 1).
-     *
-     * <p>This does not affect ranking, but the default implementation does make scores
-     * from different queries more comparable than they would be by eliminating the
-     * magnitude of the Query vector as a factor in the score.
-     *
-     * @param sumOfSquaredWeights the sum of the squares of query term weights
-     * @return a normalization factor for query weights
-     */
-    @Override
-    public abstract float queryNorm(float sumOfSquaredWeights);
-
     /** Computes a score factor based on a term or phrase's frequency in a
      * document.  This value is multiplied by the {@link #idf(long, long)}
      * factor for each term in the query and these products are then summed to
@@ -753,14 +737,14 @@ public abstract class TFIDFWithoutQueryNormSimilarity extends Similarity {
         @Override
         public float getValueForNormalization() {
             // TODO: (sorta LUCENE-1907) make non-static class and expose this squaring via a nice method to subclasses?
-            return 1;  // sum of squared weights
+            return 1.0F;  // sum of squared weights
         }
 
         @Override
         public void normalize(float queryNorm, float boost) {
             this.boost = boost;
-            this.queryNorm = queryNorm;
-            queryWeight = queryNorm * boost * idf.getValue();
+            this.queryNorm = 1;
+            queryWeight = 1 * boost * idf.getValue();
             value = queryWeight * idf.getValue();         // idf for document
         }
     }
